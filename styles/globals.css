@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --globio-orange: #f48c06;
+  --globio-gold: #ffd000;
+}
