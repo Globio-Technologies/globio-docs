@@ -1,7 +1,11 @@
 'use client';
 
-import { Logo } from '@stanlink-inc/ui';
-
 export function DocsLogo() {
-  return <Logo width={80} />;
+  return (
+    <img
+      src="/assets/docs-site/globio-docs-site-textmark-logo.png"
+      alt="Globio Docs"
+      style={{ width: 140, height: 'auto', display: 'block' }}
+    />
+  );
 }

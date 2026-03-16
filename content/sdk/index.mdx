@@ -1,3 +1,62 @@
 # SDK Reference
 
-Documentation coming soon.
+`@globio/sdk` is the official JavaScript and TypeScript SDK for
+Globio.
+
+It gives you a single client for the full platform:
+
+- GlobioId
+- GlobalDoc
+- GlobalVault
+- GlobalPulse
+- GlobalScope
+- GlobalSync
+- GlobalSignal
+- GlobalMart
+- GlobalBrain
+- GlobalCode
+
+## Supported environments
+
+The SDK is designed for modern JavaScript runtimes:
+
+- Browsers
+- Node.js
+- Bun
+- Deno
+- Edge runtimes
+
+## Install
+
+```bash
+npm install @globio/sdk
+```
+
+Or with JSR:
+
+```bash
+npx jsr add @globio/sdk
+```
+
+## Basic initialization
+
+```ts
+import { Globio } from '@globio/sdk';
+
+const globio = new Globio({
+  apiKey: 'glo_client_your_key_here',
+});
+```
+
+Use a client key in frontend code and a server key in trusted
+server environments.
+
+## Example
+
+```ts
+const result = await globio.doc.get('players', 'player_001');
+
+if (result.success) {
+  console.log(result.data.data.username);
+}
+```

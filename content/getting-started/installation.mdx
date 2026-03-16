@@ -1,3 +1,40 @@
 # Installation
 
-Documentation coming soon.
+Globio ships as a single SDK on npm and JSR.
+
+## npm
+
+```bash
+npm install @globio/sdk
+```
+
+## JSR
+
+```bash
+npx jsr add @globio/sdk
+```
+
+## Initialize the SDK
+
+The current SDK exports the `Globio` client:
+
+```ts
+import { Globio } from '@globio/sdk';
+
+const client = new Globio({
+  apiKey: 'glo_client_xxx',
+});
+```
+
+## Access GlobalDoc
+
+```ts
+const player = await client.doc.get('players', 'player_001');
+```
+
+For new projects, the fastest path is:
+
+1. Create a project in the console
+2. Enable the service you want to use
+3. Copy your client key
+4. Initialize `new Globio({ apiKey })`

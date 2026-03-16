@@ -1,3 +1,41 @@
 # CLI Installation
 
-Documentation coming soon.
+Install the CLI globally if you want the `globio` command
+available everywhere.
+
+## npm
+
+```bash
+npm install -g @globio/cli
+```
+
+## JSR
+
+```bash
+npx jsr add -g @globio/cli
+```
+
+## Log in
+
+```bash
+globio login
+```
+
+That opens the browser approval flow by default. You can also
+log in non-interactively with a PAT:
+
+```bash
+globio login --token glo_pat_xxxxx
+```
+
+## Verify your session
+
+```bash
+globio whoami
+```
+
+For automation:
+
+```bash
+globio whoami --json
+```

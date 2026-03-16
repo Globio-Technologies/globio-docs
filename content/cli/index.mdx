@@ -1,3 +1,48 @@
 # CLI Reference
 
-Documentation coming soon.
+`@globio/cli` is the official command-line interface for Globio.
+
+Use it to:
+
+- authenticate to your account
+- switch between multiple profiles
+- create and manage projects
+- deploy edge functions
+- manage GC Hooks
+- stream live logs
+- migrate from Firebase
+
+## Install
+
+```bash
+npm install -g @globio/cli
+```
+
+You can also run it without a global install:
+
+```bash
+npx @globio/cli <command>
+```
+
+## First run
+
+```bash
+globio login
+globio whoami
+```
+
+After login, choose or create a project:
+
+```bash
+globio projects list
+globio projects use <projectId>
+```
+
+## Common workflows
+
+```bash
+globio services list
+globio functions list
+globio hooks list
+globio whoami --json
+```

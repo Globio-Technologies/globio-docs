@@ -1,3 +1,133 @@
 # Quick Start
 
-Documentation coming soon.
+This guide takes you from a fresh Globio account to your
+first document stored in GlobalDoc.
+
+## 1. Create your account
+
+Go to [console.globio.stanlink.online](https://console.globio.stanlink.online)
+and sign in.
+
+From the console:
+
+1. Create your organization
+2. Create a project
+3. Open that project in the console
+
+## 2. Enable GlobalDoc
+
+Inside your project, enable **GlobalDoc** in the services view.
+
+You need an enabled GlobalDoc service before you can create
+collections or write documents.
+
+## 3. Create a client API key
+
+In the project settings or API keys screen, create or copy a
+client key for your app.
+
+Globio client keys start with `glo_client_`.
+
+## 4. Install the SDK
+
+```bash
+npm install @globio/sdk
+```
+
+## 5. Initialize the SDK
+
+```ts
+import { Globio } from '@globio/sdk';
+
+const globio = new Globio({
+  apiKey: 'glo_client_your_key_here',
+});
+```
+
+## 6. Create a collection
+
+Create a collection called `players`:
+
+```ts
+const collection = await globio.doc.createCollection('players');
+
+if (!collection.success) {
+  throw new Error(collection.error.message);
+}
+```
+
+## 7. Create a document
+
+Write your first player document:
+
+```ts
+const write = await globio.doc.set('players', 'player_001', {
+  username: 'dragonslayer',
+  level: 1,
+  xp: 0,
+  coins: 100,
+  region: 'africa',
+});
+
+if (!write.success) {
+  throw new Error(write.error.message);
+}
+```
+
+## 8. Read the document back
+
+```ts
+const player = await globio.doc.get('players', 'player_001');
+
+if (!player.success) {
+  throw new Error(player.error.message);
+}
+
+console.log(player.data.id);
+console.log(player.data.data.username);
+console.log(player.data.data.level);
+```
+
+## Full example
+
+```ts
+import { Globio } from '@globio/sdk';
+
+const globio = new Globio({
+  apiKey: 'glo_client_your_key_here',
+});
+
+async function main() {
+  const collection = await globio.doc.createCollection('players');
+  if (!collection.success && collection.error.status !== 409) {
+    throw new Error(collection.error.message);
+  }
+
+  const write = await globio.doc.set('players', 'player_001', {
+    username: 'dragonslayer',
+    level: 1,
+    xp: 0,
+    coins: 100,
+    region: 'africa',
+  });
+
+  if (!write.success) {
+    throw new Error(write.error.message);
+  }
+
+  const player = await globio.doc.get('players', 'player_001');
+  if (!player.success) {
+    throw new Error(player.error.message);
+  }
+
+  console.log(player.data.data);
+}
+
+main().catch(console.error);
+```
+
+## Next steps
+
+- Continue with [Installation](/getting-started/installation)
+- Explore [GlobalDoc](/services/global-doc)
+- Install the [CLI](/cli/installation)

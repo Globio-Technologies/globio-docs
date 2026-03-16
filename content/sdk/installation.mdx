@@ -1,3 +1,49 @@
 # SDK Installation
 
-Documentation coming soon.
+Install the SDK from npm or JSR.
+
+## npm
+
+```bash
+npm install @globio/sdk
+```
+
+## JSR
+
+```bash
+npx jsr add @globio/sdk
+```
+
+## TypeScript support
+
+TypeScript types are included in the package. No separate
+`@types` install is required.
+
+## Module support
+
+The SDK supports both:
+
+- ESM
+- CommonJS
+
+## Basic setup
+
+```ts
+import { Globio } from '@globio/sdk';
+
+const globio = new Globio({
+  apiKey: 'glo_client_xxx',
+});
+```
+
+## Verify it works
+
+```ts
+const result = await globio.doc.query('players', { limit: 5 });
+
+if (!result.success) {
+  throw new Error(result.error.message);
+}
+
+console.log(result.data.length);
+```
