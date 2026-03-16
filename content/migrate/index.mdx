@@ -1,3 +1,27 @@
-# Migrate from Firebase
+# Migrate to Globio
 
-Documentation coming soon.
+Globio provides built-in migration tools to help you move existing data
+from Firebase into the Globio platform.
+
+## What you can migrate
+
+| Source | Destination | Tool |
+|---|---|---|
+| Firebase Firestore | GlobalDoc | `globio migrate firestore` |
+| Firebase Storage | GlobalVault | `globio migrate firebase-storage` |
+
+## Before you start
+
+You will need:
+- A Globio account and project — create one at
+  [console.globio.stanlink.online](https://console.globio.stanlink.online)
+- The Globio CLI installed — see [CLI Installation](/cli/installation)
+- A Firebase service account JSON file with read access to your project
+
+Download your service account JSON from the
+[Firebase Console](https://console.firebase.google.com) under:
+**Project Settings → Service Accounts → Generate new private key**
+
+## Next steps
+
+- [Migrate from Firebase →](/migrate/from-firebase)
