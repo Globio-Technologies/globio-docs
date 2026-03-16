@@ -1,3 +1,93 @@
-# SDK Authentication
+# Authentication
 
-Documentation coming soon.
+The `client.id` service handles authentication flows including sign up, sign in, sign out, session access, and password reset.
+
+## Sign up
+
+```typescript
+const result = await client.id.signUp({
+  email: 'player@example.com',
+  password: 'password123',
+  display_name: 'DragonSlayer',
+});
+
+if (result.success) {
+  const { user, session } = result.data;
+  console.log('Signed up:', user.id);
+}
+```
+
+## Sign in
+
+```typescript
+const result = await client.id.signIn({
+  email: 'player@example.com',
+  password: 'password123',
+});
+
+if (result.success) {
+  const { user, session } = result.data;
+  console.log('Signed in:', user.email);
+}
+```
+
+## Get current session
+
+```typescript
+const session = client.id.getSession();
+
+if (session) {
+  console.log('Active session:', session.user_id);
+} else {
+  console.log('No active session');
+}
+```
+
+## Sign out
+
+```typescript
+await client.id.signOut();
+```
+
+## Refresh session
+
+Sessions expire after 15 minutes. The SDK handles token refresh automatically when you make service calls. You can also refresh manually:
+
+```typescript
+const result = await client.id.refreshToken();
+```
+
+## Password reset
+
+```typescript
+// Request a reset email
+await client.id.requestPasswordReset('player@example.com');
+
+// Reset with the token from the email
+await client.id.confirmPasswordReset(
+  'token-from-email',
+  'newPassword123',
+);
+```
+
+## Session persistence
+
+In browser environments, the SDK persists sessions automatically using local storage. The user stays signed in across page refreshes until they sign out or the session expires.
+
+In non-browser environments (Node.js, Cloudflare Workers), sessions are held in memory only and do not persist across restarts.
+
+## Error handling
+
+All authentication methods return a result object. Always check for errors:
+
+```typescript
+const result = await client.id.signIn({
+  email: 'player@example.com',
+  password: 'wrong-password',
+});
+
+if (!result.success) {
+  console.error(result.error.message);
+  // 'Invalid credentials'
+}
+```

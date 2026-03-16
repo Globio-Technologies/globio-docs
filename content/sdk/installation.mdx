@@ -1,11 +1,17 @@
-# SDK Installation
-
-Install the SDK from npm or JSR.
+# Installation
 
 ## npm
 
 ```bash
 npm install @globio/sdk
+```
+
+```bash
+# yarn
+yarn add @globio/sdk
+
+# pnpm
+pnpm add @globio/sdk
 ```
 
 ## JSR
@@ -14,36 +20,59 @@ npm install @globio/sdk
 npx jsr add @globio/sdk
 ```
 
-## TypeScript support
+## Initialization
 
-TypeScript types are included in the package. No separate
-`@types` install is required.
+Import the `Globio` class and initialize with your project's client API key:
 
-## Module support
-
-The SDK supports both:
-
-- ESM
-- CommonJS
-
-## Basic setup
-
-```ts
+```typescript
 import { Globio } from '@globio/sdk';
 
-const globio = new Globio({
-  apiKey: 'glo_client_xxx',
+const client = new Globio({
+  apiKey: 'glo_client_your_key_here',
 });
 ```
 
-## Verify it works
+Get your client key from the [Globio Console](https://console.globio.stanlink.online):
+1. Open your project
+2. Go to **API Keys**
+3. Create or copy your **client key**
 
-```ts
-const result = await globio.doc.query('players', { limit: 5 });
+## Configuration options
 
-if (!result.success) {
-  throw new Error(result.error.message);
-}
+```typescript
+const client = new Globio({
+  apiKey: string,   // required — your project client key
+});
+```
 
-console.log(result.data.length);
+## Using services
+
+All services are immediately available on the initialized client:
+
+```typescript
+// Document database
+await client.doc.createCollection('players');
+
+// Authentication
+const session = await client.id.signIn({
+  email: 'player@example.com',
+  password: 'password123',
+});
+
+// File storage
+await client.vault.uploadFile(file, {
+  metadata: { owner: 'player_001' },
+});
+```
+
+## Module formats
+
+The SDK ships both ESM and CJS builds. It works with standard bundlers (Vite, webpack, esbuild) and modern Node.js without configuration.
+
+```typescript
+// ESM (recommended)
+import { Globio } from '@globio/sdk';
+
+// CJS
+const { Globio } = require('@globio/sdk');
 ```

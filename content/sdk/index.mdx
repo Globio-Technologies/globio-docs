@@ -1,62 +1,66 @@
-# SDK Reference
+# SDK Overview
 
-`@globio/sdk` is the official JavaScript and TypeScript SDK for
-Globio.
+The Globio SDK is the official JavaScript/TypeScript client for the Globio platform. It gives your game direct access to all Globio services from a single initialized client.
 
-It gives you a single client for the full platform:
-
-- GlobioId
-- GlobalDoc
-- GlobalVault
-- GlobalPulse
-- GlobalScope
-- GlobalSync
-- GlobalSignal
-- GlobalMart
-- GlobalBrain
-- GlobalCode
-
-## Supported environments
-
-The SDK is designed for modern JavaScript runtimes:
-
-- Browsers
-- Node.js
-- Bun
-- Deno
-- Edge runtimes
-
-## Install
+## Installation
 
 ```bash
 npm install @globio/sdk
 ```
 
-Or with JSR:
+Or from JSR:
 
 ```bash
 npx jsr add @globio/sdk
 ```
 
-## Basic initialization
+## Quick start
 
-```ts
+```typescript
 import { Globio } from '@globio/sdk';
 
-const globio = new Globio({
+const client = new Globio({
   apiKey: 'glo_client_your_key_here',
 });
 ```
 
-Use a client key in frontend code and a server key in trusted
-server environments.
+Your API key is available in the [Globio Console](https://console.globio.stanlink.online) under your project's API Keys section. Use your **client key** — never expose your server key in client-side code.
 
-## Example
+## Services
 
-```ts
-const result = await globio.doc.get('players', 'player_001');
+Once initialized, all services are available as properties on the client instance:
 
-if (result.success) {
-  console.log(result.data.data.username);
-}
+| Property | Service | Description |
+|---|---|---|
+| `client.id` | GlobioId | Authentication and user management |
+| `client.doc` | GlobalDoc | Document database |
+| `client.vault` | GlobalVault | File storage |
+| `client.pulse` | GlobalPulse | Feature flags and remote config |
+| `client.scope` | GlobalScope | Analytics and event tracking |
+| `client.sync` | GlobalSync | Real-time multiplayer rooms |
+| `client.signal` | GlobalSignal | Push notifications |
+| `client.mart` | GlobalMart | Game economy and payments |
+| `client.brain` | GlobalBrain | AI agents and LLM routing |
+| `client.code` | GlobalCode | Edge functions and GC Hooks |
+
+## TypeScript
+
+The SDK ships its own TypeScript types — no separate `@types/globio` package is needed.
+
+```typescript
+import { Globio } from '@globio/sdk';
+// Types are included automatically
 ```
+
+## Environment support
+
+| Environment | Support |
+|---|---|
+| Browser | ✅ Full support |
+| Node.js | ⚠️ Partial — fetch-based calls work, offline persistence does not |
+| Cloudflare Workers | ⚠️ Partial — same caveat as Node.js |
+| React Native | ❌ Not supported |
+
+The SDK includes an offline persistence layer that uses IndexedDB. This is browser-only. In Node.js or edge runtimes, basic service calls work correctly but offline/cache behavior should not be relied on.
+
+For server-side usage in Node.js or Cloudflare Workers, use your **server key** via direct API calls or the [CLI](/cli) instead.
