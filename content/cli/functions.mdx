@@ -1,3 +1,92 @@
 # Edge Functions
 
-Documentation coming soon.
+Edge functions are HTTP-triggered serverless functions that run on Cloudflare Workers via GlobalCode. The `globio functions` command group manages them.
+
+**Alias:** `globio fn`
+
+## List functions
+
+```bash
+globio functions list
+globio functions list --profile <name>
+globio functions list --json
+```
+
+## Create a function
+
+Scaffold a local function file:
+
+```bash
+globio functions create <slug>
+globio functions create <slug> --profile <name>
+globio functions create <slug> --json
+```
+
+## Deploy a function
+
+Deploy a local file as an edge function:
+
+```bash
+globio functions deploy <slug>
+globio functions deploy <slug> --file <path>
+globio functions deploy <slug> --name <display-name>
+globio functions deploy <slug> --profile <name>
+globio functions deploy <slug> --json
+```
+
+Example:
+
+```bash
+globio functions deploy matchmaking --file ./functions/matchmaking.ts
+```
+
+## Invoke a function
+
+Test a function by invoking it directly:
+
+```bash
+globio functions invoke <slug>
+globio functions invoke <slug> --input '{"playerId":"p_123"}'
+globio functions invoke <slug> --profile <name>
+globio functions invoke <slug> --json
+```
+
+## View logs
+
+```bash
+globio functions logs <slug>
+globio functions logs <slug> --limit <n>
+globio functions logs <slug> --profile <name>
+globio functions logs <slug> --json
+```
+
+## Watch live logs
+
+Stream live invocation logs via SSE:
+
+```bash
+globio functions watch <slug>
+globio functions watch <slug> --profile <name>
+```
+
+`watch` does not support `--json` — output is streamed as it arrives.
+
+## Enable / disable
+
+```bash
+globio functions enable <slug>
+globio functions enable <slug> --profile <name>
+globio functions enable <slug> --json
+
+globio functions disable <slug>
+globio functions disable <slug> --profile <name>
+globio functions disable <slug> --json
+```
+
+## Delete
+
+```bash
+globio functions delete <slug>
+globio functions delete <slug> --profile <name>
+globio functions delete <slug> --json
+```

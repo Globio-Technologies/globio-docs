@@ -1,3 +1,70 @@
-# Migrate
+# Migrate from Firebase
 
-Documentation coming soon.
+The CLI includes built-in migration tools to move data from Firebase projects into Globio.
+
+See also: [Full migration guide](/migrate/from-firebase)
+
+## Migrate Firestore
+
+Import Firestore collections into GlobalDoc:
+
+```bash
+globio migrate firestore --from <path>
+```
+
+### Flags
+
+```bash
+--from <path>          # required — path to Firebase service account JSON
+--collection <name>    # migrate a specific collection only
+--all                  # migrate all collections
+--profile <name>
+--json
+```
+
+### Example
+
+```bash
+# Migrate all collections
+globio migrate firestore --from ./service-account.json --all
+
+# Migrate a specific collection
+globio migrate firestore --from ./service-account.json --collection players
+```
+
+The CLI automatically creates matching GlobalDoc collections and indexes.
+
+## Migrate Firebase Storage
+
+Import files from Firebase Storage into GlobalVault:
+
+```bash
+globio migrate firebase-storage --from <path> --bucket <name>
+```
+
+### Flags
+
+```bash
+--from <path>          # required — path to Firebase service account JSON
+--bucket <name>        # required — Firebase Storage bucket name
+--folder <path>        # migrate a specific folder only
+--all                  # migrate all files
+--profile <name>
+--json
+```
+
+### Example
+
+```bash
+# Migrate all files
+globio migrate firebase-storage \
+  --from ./service-account.json \
+  --bucket my-game.appspot.com \
+  --all
+
+# Migrate a specific folder
+globio migrate firebase-storage \
+  --from ./service-account.json \
+  --bucket my-game.appspot.com \
+  --folder avatars
+```

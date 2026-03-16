@@ -1,3 +1,98 @@
 # GC Hooks
 
-Documentation coming soon.
+GC Hooks are event-triggered functions that fire automatically when specific platform events occur, such as a user signing up or a document being created.
+The `globio hooks` command group manages them.
+
+## Available trigger events
+
+| Event | Fires when |
+|---|---|
+| `id.onSignup` | A new user registers |
+| `id.onSignin` | A user signs in |
+| `id.onSignout` | A user signs out |
+| `id.onPasswordReset` | A password is reset |
+| `doc.onCreate` | A document is created |
+| `doc.onUpdate` | A document is updated |
+| `doc.onDelete` | A document is deleted |
+| `mart.onPurchase` | A purchase is made |
+| `mart.onPayment` | A payment completes |
+| `sync.onRoomCreate` | A multiplayer room is created |
+| `sync.onRoomClose` | A multiplayer room closes |
+| `sync.onPlayerJoin` | A player joins a room |
+| `sync.onPlayerLeave` | A player leaves a room |
+| `vault.onUpload` | A file is uploaded |
+| `vault.onDelete` | A file is deleted |
+| `signal.onDeliver` | A notification is delivered |
+
+## List hooks
+
+```bash
+globio hooks
+globio hooks list
+globio hooks list --profile <name>
+globio hooks list --json
+```
+
+## Create a hook
+
+```bash
+globio hooks create <slug>
+globio hooks create <slug> --json
+```
+
+## Deploy a hook
+
+```bash
+globio hooks deploy <slug>
+globio hooks deploy <slug> --file <path>
+globio hooks deploy <slug> --name <display-name>
+globio hooks deploy <slug> --trigger <event>
+globio hooks deploy <slug> --profile <name>
+globio hooks deploy <slug> --json
+```
+
+Example:
+
+```bash
+globio hooks deploy on-signup \
+  --file ./hooks/on-signup.ts \
+  --trigger id.onSignup
+```
+
+## View logs
+
+```bash
+globio hooks logs <slug>
+globio hooks logs <slug> --limit <n>
+globio hooks logs <slug> --profile <name>
+globio hooks logs <slug> --json
+```
+
+## Watch live logs
+
+```bash
+globio hooks watch <slug>
+globio hooks watch <slug> --profile <name>
+```
+
+`watch` does not support `--json`.
+
+## Enable / disable
+
+```bash
+globio hooks enable <slug>
+globio hooks enable <slug> --profile <name>
+globio hooks enable <slug> --json
+
+globio hooks disable <slug>
+globio hooks disable <slug> --profile <name>
+globio hooks disable <slug> --json
+```
+
+## Delete
+
+```bash
+globio hooks delete <slug>
+globio hooks delete <slug> --profile <name>
+globio hooks delete <slug> --json
+```

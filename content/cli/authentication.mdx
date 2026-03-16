@@ -1,3 +1,57 @@
-# CLI Authentication
+# Authentication
 
-Documentation coming soon.
+The CLI authenticates at the account level using personal access tokens.
+
+## Browser login
+
+```bash
+globio login
+```
+
+## PAT login
+
+```bash
+globio login --token <pat>
+```
+
+## Named profiles
+
+```bash
+globio login --profile work
+globio login --profile personal
+globio use work
+```
+
+## Credentials storage
+
+Credentials are stored in:
+
+```bash
+~/.globio/config.json
+~/.globio/profiles/
+~/.globio/profiles/<name>.json
+```
+
+## Logout
+
+```bash
+globio logout
+globio logout --profile <name>
+```
+
+## Who am I
+
+```bash
+globio whoami
+globio whoami --profile <name>
+globio whoami --json
+```
+
+## Profiles
+
+```bash
+globio profiles
+globio profiles list
+globio profiles list --json
+globio use <profile>
+```

@@ -1,3 +1,53 @@
 # Projects
 
-Documentation coming soon.
+The `globio projects` command group manages projects and active project selection.
+
+## Init flags
+
+```bash
+globio init
+globio init --name <project-name>
+globio init --slug <slug>
+globio init --org <orgId>
+globio init --env <environment>    # development | staging | production
+globio init --no-migrate           # skip migration prompt
+globio init --from <path>          # import from Firebase service account path
+globio init --profile <name>
+globio init --json
+```
+
+## List projects
+
+```bash
+globio projects list
+globio projects list --profile <name>
+globio projects list --json
+```
+
+## Create a project
+
+```bash
+globio projects create
+globio projects create --name <name>
+globio projects create --org <orgId>
+globio projects create --env <environment>
+globio projects create --profile <name>
+globio projects create --json
+```
+
+## Switch active project
+
+```bash
+globio projects use <projectId>
+globio projects use <projectId> --profile <name>
+globio projects use <projectId> --json
+```
+
+## Project files created by init
+
+`globio init` creates:
+
+```bash
+globio.config.ts
+.env
+```
