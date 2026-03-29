@@ -6,3 +6,35 @@
   --globio-orange: #f48c06;
   --globio-gold: #ffd000;
 }
+
+.nextra-navbar {
+  border-bottom: 1px solid rgba(244, 140, 6, 0.18);
+  box-shadow: 0 12px 32px rgba(16, 17, 18, 0.08);
+}
+
+.nextra-navbar-blur {
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.94) 0%, rgba(255, 249, 240, 0.88) 100%),
+    linear-gradient(90deg, rgba(244, 140, 6, 0.08) 0%, rgba(255, 208, 0, 0.04) 100%);
+  backdrop-filter: blur(18px);
+}
+
+.nextra-navbar nav {
+  min-height: var(--nextra-navbar-height);
+}
+
+.nextra-navbar nav a[aria-label="Home page"] {
+  position: relative;
+}
+
+.nextra-navbar nav a[aria-label="Home page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--globio-orange), var(--globio-gold));
+  opacity: 0.9;
+}
