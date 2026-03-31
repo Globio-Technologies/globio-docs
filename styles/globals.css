@@ -8,6 +8,11 @@
 }
 
 .nextra-navbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
   border-bottom: 1px solid rgba(244, 140, 6, 0.18);
   box-shadow: 0 12px 32px rgba(16, 17, 18, 0.08);
 }
